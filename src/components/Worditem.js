@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import AppDimensions from '../untils/AppDimensions';
 import { connect } from 'react-redux';
-
+import actioncreatetors from '../redux/action/actioncreatetors';
  class WordItem extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.item.isMemorized !== this.props.item.isMemorized) {
@@ -30,7 +30,7 @@ import { connect } from 'react-redux';
         </View>
         <View style={styles.containerTouchable}>
           <TouchableOpacity
-            onPress={() => this.props.dispatch({type:'TOGGLE_WORD',id:word.id})}
+            onPress={() => this.props.toggleWord(word.id)}
             style={{
               ...styles.touchableMemorized,
               backgroundColor: word.isMemorized ? '#28a845' : '#DD3444',
@@ -40,7 +40,7 @@ import { connect } from 'react-redux';
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => this.props.dispatch({type:'REMOVE_WORD',id:word.id})}
+            onPress={() => this.props.removeWord(word.id)}
             style={styles.touchableRemove}>
             <Text style={styles.textSize}>Remove</Text>
           </TouchableOpacity>
@@ -56,7 +56,7 @@ import { connect } from 'react-redux';
 const mapStateToProps = state =>{
   return { filterMode: state.filterMode}
 }
-export default connect (mapStateToProps)(WordItem)
+export default connect (mapStateToProps,actioncreatetors)(WordItem)
 const styles = StyleSheet.create({
   containerWord: {
     flexDirection: 'column',

@@ -1,16 +1,23 @@
-import React, {Component} from 'react';
-import {View, StyleSheet} from 'react-native';
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 import Word from '../components/Word';
 import Form from '../components/Form';
 import Filter from '../components/Filter';
+import actioncreatetors from '../redux/action/actioncreatetors';
 
 export default class MainScreen extends Component {
+  componentDidMount() {
+    fetch('https://severnode2909.herokuapp.com/word')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
+  }
   render() {
     return (
       <View style={styles.container}>
         <Form />
         <Filter />
-        <Word /> 
+        <Word />
       </View>
     );
   }
